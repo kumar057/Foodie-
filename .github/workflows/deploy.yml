@@ -25,6 +25,8 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+      - name: Configure Flutter web
+        run: flutter create . --platforms web
       - run: flutter pub get
       - run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
       - uses: actions/configure-pages@v5
