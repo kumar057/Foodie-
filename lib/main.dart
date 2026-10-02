@@ -63,11 +63,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
    OutlinedButton(onPressed:()=>go('Contact'),child:const Text('Reserve a Table'))]),
   const SizedBox(height:45),const Row(children:[_Stat('12+','signature dishes'),SizedBox(width:38),_Stat('4.9','guest rating'),SizedBox(width:38),_Stat('7 days','open weekly')])
  ]);
- Widget foodHero()=>AnimatedBuilder(animation:float,builder:(context,_){final y=lerpDouble(-12,12,float.value)!;return Transform.translate(offset:Offset(0,y),child:Center(child:Stack(alignment:Alignment.center,children:[
-  Container(width:330,height:330,decoration:BoxDecoration(shape:BoxShape.circle,color:const Color(0xFFFFB347).withOpacity(.09),boxShadow:[BoxShadow(color:const Color(0xFFFFB347).withOpacity(.14),blurRadius:80,spreadRadius:15)])),
-  const Text('🍔',style:TextStyle(fontSize:190)),
-  Positioned(right:8,top:35,child:glass('CHEF’S\nCHOICE')),Positioned(left:8,bottom:35,child:glass('FRESH\nDAILY'))
- ]));});
+ Widget foodHero()=>AnimatedBuilder(
+  animation:float,
+  builder:(context,_){
+   final y=lerpDouble(-12,12,float.value)!;
+   return Transform.translate(
+    offset:Offset(0,y),
+    child:Center(
+     child:Stack(
+      alignment:Alignment.center,
+      children:[
+       Container(width:330,height:330,decoration:BoxDecoration(shape:BoxShape.circle,color:const Color(0xFFFFB347).withOpacity(.09),boxShadow:[BoxShadow(color:const Color(0xFFFFB347).withOpacity(.14),blurRadius:80,spreadRadius:15)])),
+       const Text('🍔',style:TextStyle(fontSize:190)),
+       Positioned(right:8,top:35,child:glass('CHEF’S\\nCHOICE')),
+       Positioned(left:8,bottom:35,child:glass('FRESH\\nDAILY')),
+      ],
+     ),
+    ),
+   );
+  },
+ );
  Widget glass(String s)=>ClipRRect(borderRadius:BorderRadius.circular(18),child:BackdropFilter(filter:ImageFilter.blur(sigmaX:12,sigmaY:12),child:Container(padding:const EdgeInsets.all(14),decoration:BoxDecoration(color:Colors.white.withOpacity(.08),border:Border.all(color:Colors.white.withOpacity(.12)),borderRadius:BorderRadius.circular(18)),child:Text(s,style:const TextStyle(fontSize:11,fontWeight:FontWeight.w800,height:1.2)))));
  Widget menu(){final cats=['All','Burgers','Pizza','Pasta','Healthy','Desserts','Drinks'];final shown=category=='All'?foods:foods.where((f)=>f.category==category).toList();return section('SIGNATURE MENU','Made for cravings.','Handcrafted favourites with a modern Tasty Bites touch.',Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
   Wrap(spacing:8,runSpacing:8,children:cats.map((x)=>ChoiceChip(label:Text(x),selected:category==x,onSelected:(_)=>setState(()=>category=x))).toList()),const SizedBox(height:28),
